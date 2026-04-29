@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>游喬茵 Sylvia Yu — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Serif+TC:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --warm-white: #FDFAF7;
+    --ink: #1C1A18;
+    --ink-light: #4A4540;
+    --ink-muted: #8A847C;
+    --terracotta: #C4614A;
+    --terracotta-light: #E8937E;
+    --terracotta-pale: #F5E8E4;
+    --sage: #7A8C6E;
+    --sage-light: #B5C4A8;
+    --sage-pale: #EEF3EB;
+    --gold: #C9A84C;
+    --border: rgba(28,26,24,0.12);
+    --shadow: 0 2px 20px rgba(28,26,24,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(247,243,238,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: var(--terracotta);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 5rem 5rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .hero-name-en {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    color: var(--terracotta);
+    font-style: italic;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.45s forwards;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-tagline strong {
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  .hero-pills {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+    border-radius: 99px;
+    letter-spacing: 0.03em;
+  }
+
+  .pill-terracotta { background: var(--terracotta-pale); color: var(--terracotta); border: 1px solid rgba(196,97,74,0.2); }
+  .pill-sage { background: var(--sage-pale); color: var(--sage); border: 1px solid rgba(122,140,110,0.2); }
+  .pill-gold { background: #FBF5E6; color: #9A7828; border: 1px solid rgba(201,168,76,0.2); }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.85s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--terracotta);
+    color: white;
+    text-decoration: none;
+    padding: 0.85rem 1.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: all 0.25s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: #B05540;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(196,97,74,0.3);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.85rem 1.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+  }
+
+  /* Hero right side */
+  .hero-right {
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+  }
+
+  .hero-right-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 3rem 3rem;
+  }
+
+  .hero-photo-wrap {
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s 0.6s forwards;
+  }
+
+  .hero-photo-wrap::before {
+    content: '';
+    position: absolute;
+    top: -16px; left: -16px;
+    width: 100%; height: 100%;
+    border: 1px solid var(--terracotta);
+    opacity: 0.4;
+    border-radius: 4px;
+  }
+
+  .hero-photo {
+    width: 300px;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    background: #2A2825;
+    position: relative;
+  }
+
+  /* photo placeholder if img fails */
+  .hero-photo-placeholder {
+    width: 300px;
+    height: 380px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #2A2825 0%, #3A3530 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hero-photo-initials {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--terracotta);
+    line-height: 1;
+  }
+
+  .hero-photo-name-cn {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.3em;
+  }
+
+  /* floating stats */
+  .stat-card {
+    position: absolute;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+
+  .stat-card:nth-child(1) { bottom: 5rem; left: -3rem; animation-delay: 1s; }
+  .stat-card:nth-child(2) { top: 7rem; right: -2rem; animation-delay: 1.2s; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--terracotta);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
+  }
+
+  /* hero bg deco */
+  .hero-deco {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-deco-1 {
+    width: 400px; height: 400px;
+    background: var(--terracotta);
+    opacity: 0.06;
+    top: -100px; right: -100px;
+  }
+
+  .hero-deco-2 {
+    width: 200px; height: 200px;
+    background: var(--gold);
+    opacity: 0.08;
+    bottom: 80px; left: 40px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 5rem; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--warm-white);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    color: var(--ink-light);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .about-highlight {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--terracotta-pale);
+    border-left: 3px solid var(--terracotta);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.95rem;
+    color: var(--terracotta);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .about-contact { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item:hover { color: var(--terracotta); }
+
+  .contact-icon {
+    width: 32px; height: 32px;
+    background: var(--terracotta-pale);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--cream); }
+
+  .timeline { position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 0 0 3rem 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 6px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    border: 2px solid var(--cream);
+  }
+
+  .timeline-date {
+    text-align: right;
+    padding-right: 2rem;
+    padding-left: 0;
+  }
+
+  .timeline-date-range {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+  }
+
+  .timeline-body {
+    padding-left: 2rem;
+    border-left: none;
+  }
+
+  .timeline-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-role {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+  }
+
+  .timeline-achievements {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timeline-achievements li {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .timeline-achievements li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--terracotta-light);
+    font-size: 0.8rem;
+  }
+
+  .achievement-highlight {
+    display: inline-flex;
+    align-items: center;
+    background: var(--terracotta-pale);
+    color: var(--terracotta);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.15rem 0.6rem;
+    border-radius: 3px;
+    margin-left: 0.4rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--ink); }
+
+  #skills .section-label { color: var(--terracotta-light); }
+  #skills .section-label::before { background: var(--terracotta-light); }
+  #skills .section-title { color: var(--warm-white); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s, border 0.3s;
+  }
+
+  .skill-card.visible { opacity: 1; transform: translateY(0); }
+
+  .skill-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(196,97,74,0.3);
+    transform: translateY(-4px);
+  }
+
+  .skill-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .skill-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--warm-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-level {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
+
+  .level-beginner { background: rgba(122,140,110,0.2); color: var(--sage-light); }
+  .level-intermediate { background: rgba(201,168,76,0.15); color: #D4B85A; }
+  .level-advanced { background: rgba(196,97,74,0.2); color: var(--terracotta-light); }
+
+  .skill-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  .skill-bar {
+    margin-top: 1.2rem;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: var(--terracotta);
+    border-radius: 1px;
+    width: 0%;
+    transition: width 1.2s ease 0.3s;
+  }
+
+  .skill-card.visible .skill-bar-fill { width: var(--fill); }
+
+  /* ── SUMMARY ── */
+  #summary {
+    background: var(--warm-white);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 7rem 5rem;
+  }
+
+  #summary .section-label { justify-content: center; }
+  #summary .section-label::before { display: none; }
+  #summary .section-label::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  .summary-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    color: var(--ink);
+    max-width: 780px;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+  }
+
+  .summary-body {
+    max-width: 700px;
+    font-size: 1rem;
+    color: var(--ink-light);
+    line-height: 1.9;
+    margin-bottom: 3rem;
+  }
+
+  .summary-body p { margin-bottom: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 3rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    color: var(--warm-white);
+    font-size: 1.1rem;
+  }
+
+  .footer-sub {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 0.2rem;
+  }
+
+  .footer-contact a {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    text-align: right;
+    margin-bottom: 0.3rem;
+    transition: color 0.2s;
+  }
+
+  .footer-contact a:hover { color: var(--terracotta-light); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.75rem; }
+
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .hero-right { min-height: 380px; }
+    .hero-photo-wrap::before { display: none; }
+    .hero-photo, .hero-photo-placeholder { width: 200px; height: 260px; }
+    .stat-card:nth-child(1) { left: 0; bottom: 1rem; }
+    .stat-card:nth-child(2) { right: 0; top: 2rem; }
+
+    section { padding: 4rem 2rem; }
+
+    #about { grid-template-columns: 1fr; gap: 2rem; }
+
+    .timeline { padding-left: 1.5rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .timeline-date { text-align: left; padding: 0; }
+
+    .skills-grid { grid-template-columns: 1fr; }
+
+    footer { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+    .footer-contact a { text-align: left; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero-ctas { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">游喬茵 Sylvia</a>
+  <ul class="nav-links">
+    <li><a href="#about">關於</a></li>
+    <li><a href="#experience">經歷</a></li>
+    <li><a href="#skills">技能</a></li>
+    <li><a href="#summary">總結</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">心理學 × 市場研究 × 前端開發</p>
+    <h1 class="hero-name">游喬茵</h1>
+    <p class="hero-name-en">Sylvia Yu</p>
+    <p class="hero-tagline">
+      以<strong>換位思考</strong>為核心，結合心理學背景與市場研究實戰經驗，
+      現積極自學前端開發，持續拓展跨領域能力。
+    </p>
+    <div class="hero-pills">
+      <span class="pill pill-terracotta">📊 市場研究</span>
+      <span class="pill pill-sage">🧠 心理學背景</span>
+      <span class="pill pill-gold">💻 前端自學中</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-primary">查看我的經歷 →</a>
+      <a href="mailto:banayuyin@gmail.com" class="btn-outline">✉ 聯絡我</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <div class="hero-photo-wrap">
+        <div class="stat-card">
+          <div class="stat-num">14+</div>
+          <div class="stat-label">完成專案數量</div>
+        </div>
+        <div class="hero-photo-placeholder">
+          <div class="hero-photo-initials">SY</div>
+          <div class="hero-photo-name-cn">游 喬 茵</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">120%</div>
+          <div class="stat-label">招生達成率</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="section-label">關於我</div>
+    <h2 class="section-title">從人心出發，<br>理解市場。</h2>
+  </div>
+  <div class="about-text">
+    <p>
+      2020 年 6 月畢業於<strong>中原大學心理學系</strong>。曾修習「消費者心理學」，
+      練習以心理學視角分析消費者與市場對產品或服務的態度與行為。
+    </p>
+    <p>
+      畢業後進入市調公司，任職<strong>督導研究員</strong>，
+      帶領實習生半年內完成約 14 個跨產業專案，深入了解市場概況與需求，
+      擅長資料蒐集與分析研究。
+    </p>
+    <p>
+      近期在 Udemy 上自學 HTML & CSS，親手打造這個作品集，
+      目標是持續深耕 PM 與網路科技相關領域。
+    </p>
+    <div class="about-highlight">
+      「換位思考是我最重要的能力——站在不同角度分析，才能有效溝通、掌握專案節奏。」
+    </div>
+    <div class="about-contact">
+      <a href="tel:0905730709" class="contact-item">
+        <span class="contact-icon">📞</span>
+        0905-730-709
+      </a>
+      <a href="mailto:banayuyin@gmail.com" class="contact-item">
+        <span class="contact-icon">✉️</span>
+        banayuyin@gmail.com
+      </a>
+      <a href="https://www.linkedin.com" class="contact-item" target="_blank">
+        <span class="contact-icon">🔗</span>
+        中原大學 心理學系 · 2020 畢業
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">工作經歷</div>
+  <h2 class="section-title">累積跨域實戰，<br>持續精進自我。</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="timeline-date-range">2020.08<br>— 2021.02</div>
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-company">亞地市場研究顧問有限公司</div>
+        <div class="timeline-role">督導研究員</div>
+        <ul class="timeline-achievements">
+          <li>聆聽國內外客戶需求，整合客戶端與公司端，主導消費者座談會規劃</li>
+          <li>成功完成約 14 個跨產業專案（醫療軟體、食品、電子、影音、金融、醫藥）<span class="achievement-highlight">14 專案</span></li>
+          <li>線上線下蒐集市場概況及需求，進行後續資料分析與報告</li>
+          <li>排定專案時程、分派工作，協助實習生克服困難，進行垂直及橫向溝通協調</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="timeline-date-range">2018.08<br>— 2020.06</div>
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-company">中原大學 理學院辦公室、應數系辦公室</div>
+        <div class="timeline-role">工讀生 · 接待</div>
+        <ul class="timeline-achievements">
+          <li>協助接待國內外訪客及學生，行政文書處理與文件排版整理</li>
+          <li>協調安排校方活動與會議，負責場地佈置</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="timeline-date-range">2017.08<br>— 2020.06</div>
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-company">心理系系上幹部</div>
+        <div class="timeline-role">副班代</div>
+        <ul class="timeline-achievements">
+          <li>參與學校會議，協助校方與學生雙向溝通，定期舉辦班級會議</li>
+          <li>協助處理校方活動及班級事務</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="timeline-date-range">2017.08</div>
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-company">心理系 106 新生中區茶會</div>
+        <div class="timeline-role">活動總召</div>
+        <ul class="timeline-achievements">
+          <li>統籌活動規劃、人員招募、宣傳文宣與美編製作</li>
+          <li>兼顧店家、工作人員與參加者三方溝通協調</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="timeline-date-range">2016.05<br>— 2016.08</div>
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-company">陳立教育事業 豐原分校</div>
+        <div class="timeline-role">工讀生 · 招生企劃</div>
+        <ul class="timeline-achievements">
+          <li>共同規劃招生活動，執行企劃開發陌生客戶</li>
+          <li>招生率超出預設值，最終達到 120%<span class="achievement-highlight">120% 達成</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">技能</div>
+  <h2 class="section-title">跨域能力，<br>持續擴張中。</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card" style="--fill: 75%">
+      <span class="skill-icon">📊</span>
+      <div class="skill-name">SPSS 統計分析</div>
+      <span class="skill-level level-intermediate">進階</span>
+      <div class="skill-desc">大學修習「心理統計學」時長期使用 SPSS 進行實驗數據分析，具備扎實的資料分析技能。</div>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+
+    <div class="skill-card" style="--fill: 40%">
+      <span class="skill-icon">💻</span>
+      <div class="skill-name">HTML & CSS</div>
+      <span class="skill-level level-beginner">學習中</span>
+      <div class="skill-desc">在 Udemy 上自學中，持續精進。這個作品集網站即為自學成果，展示目前的學習進度。</div>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+
+    <div class="skill-card" style="--fill: 30%">
+      <span class="skill-icon">🐍</span>
+      <div class="skill-name">Python</div>
+      <span class="skill-level level-beginner">基礎</span>
+      <div class="skill-desc">大學修習「Python 在心理學之應用」，曾以基礎程式碼製作心理測驗，具備入門認知。</div>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+
+    <div class="skill-card" style="--fill: 88%">
+      <span class="skill-icon">🗣</span>
+      <div class="skill-name">跨層溝通協調</div>
+      <span class="skill-level level-advanced">熟練</span>
+      <div class="skill-desc">曾同時橋接客戶、公司、實習生三方，擅長垂直與橫向溝通，有效推進專案進度。</div>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+
+    <div class="skill-card" style="--fill: 85%">
+      <span class="skill-icon">📋</span>
+      <div class="skill-name">專案管理</div>
+      <span class="skill-level level-advanced">熟練</span>
+      <div class="skill-desc">獨立管理 14 個以上跨產業專案，包含時程規劃、工作分派、進度與品質管控。</div>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+
+    <div class="skill-card" style="--fill: 80%">
+      <span class="skill-icon">🔍</span>
+      <div class="skill-name">市場研究 & 分析</div>
+      <span class="skill-level level-advanced">熟練</span>
+      <div class="skill-desc">線上線下市場資料蒐集、消費者座談會主持與分析，服務橫跨六大產業領域。</div>
+      <div class="skill-bar"><div class="skill-bar-fill"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section id="summary">
+  <div class="section-label">關於未來</div>
+  <blockquote class="summary-quote">
+    「換位思考，是我最核心的競爭力。」
+  </blockquote>
+  <div class="summary-body">
+    <p>
+      過去的學習與工作經驗，讓我有機會完成各種不同類型的專案。
+      除了時程、進度與品質的管理之外，最重要也最困難的，
+      是多方的溝通協調——這些經驗讓我深刻理解<strong>「換位思考」</strong>的力量。
+    </p>
+    <p>
+      大學期間接觸 Python，近期在 Udemy 自學 HTML & CSS，
+      雖然這條路還很長，但我從不害怕學習，更願意不斷精進自己。
+    </p>
+    <p>
+      我希望未來能在職場中學習更多 PM 與網路科技相關技能，謝謝你花時間認識我！
+    </p>
+  </div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+    <a href="mailto:banayuyin@gmail.com" class="btn-primary">✉ 寄信給我</a>
+    <a href="tel:0905730709" class="btn-outline">📞 0905-730-709</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-name">游喬茵 · Sylvia Yu</div>
+    <div class="footer-sub">心理學 × 市場研究 × 前端開發</div>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:banayuyin@gmail.com">banayuyin@gmail.com</a>
+    <a href="tel:0905730709">0905-730-709</a>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.timeline-item, .skill-card').forEach(el => observer.observe(el));
+
+// Stagger skill cards
+document.querySelectorAll('.skill-card').forEach((card, i) => {
+  card.style.transitionDelay = `${i * 0.08}s`;
+});
+</script>
+</body>
+</html>
