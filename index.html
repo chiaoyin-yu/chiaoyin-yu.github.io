@@ -165,37 +165,88 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 28px;
+      padding: 22px;
       box-shadow: 0 20px 50px rgba(80,60,30,0.07);
+    }
+
+    .aside-card-dark {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .aside-card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
     .aside-card .num {
       font-family: 'Noto Serif TC', serif;
-      font-size: 52px;
+      font-size: 36px;
       font-weight: 700;
       line-height: 1;
       display: block;
     }
 
-    .aside-card .num-label { font-size: 13px; color: var(--warm-light); }
-
-    .aside-monogram {
-      background: var(--ink);
-      color: var(--white);
-      border-radius: 24px;
-      padding: 36px 28px;
-      text-align: center;
+    .aside-card .num-label {
+      font-size: 12px;
+      color: var(--warm-light);
     }
 
-    .aside-monogram .initials {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 64px;
+    .aside-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .aside-tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--sand-dark);
+      border: 1px solid var(--border);
+      color: var(--ink-mid);
+      font-weight: 400;
+    }
+
+    .aside-tag.dark {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .aside-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .aside-type {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--warm-light);
+    }
+
+    .aside-research-group {
+      margin-bottom: 12px;
+    }
+
+    .aside-research-label {
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: -4px;
-      display: block;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 6px;
     }
-
-    .aside-monogram p { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 6px; }
 
     /* ── ABOUT ── */
     .two-col {
@@ -229,6 +280,77 @@
     }
 
     .contact-line a { color: var(--warm-mid); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── PROCESS ── */
+    .process-section { background: var(--sand-dark); }
+
+    .process-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+
+    .process-step {
+      flex: 1;
+      min-width: 140px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .process-step:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(80,60,30,0.1);
+    }
+
+    .step-num {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--warm-light);
+      margin-bottom: 8px;
+    }
+
+    .step-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .process-step h4 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .process-step p {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .process-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 20px;
+      color: var(--border);
+      margin-top: 60px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .process-flow { flex-direction: column; gap: 12px; }
+      .process-arrow { transform: rotate(90deg); margin: 0 auto; }
+      .process-step { min-width: unset; }
+    }
 
     /* ── CASE STUDIES ── */
     .case-section { background: var(--white); }
@@ -435,6 +557,7 @@
   <nav>
     <ul>
       <li><a href="#about">關於</a></li>
+      <li><a href="#process">研究流程</a></li>
       <li><a href="#case-study">案例</a></li>
       <li><a href="#experience">經歷</a></li>
       <li><a href="#skill">技能</a></li>
@@ -471,16 +594,56 @@
 
     <aside class="hero-aside">
       <div class="aside-card">
-        <strong class="num">14+</strong>
-        <span class="num-label">市場研究專案</span>
+        <div class="aside-card-header">
+          <strong class="num">15+</strong>
+          <span class="num-label">網站開發專案</span>
+        </div>
+        <div class="aside-tags">
+          <span class="aside-tag">台電</span>
+          <span class="aside-tag">台經院</span>
+          <span class="aside-tag">新北市政府</span>
+          <span class="aside-tag">保險安定基金</span>
+          <span class="aside-tag">產經資料庫</span>
+          <span class="aside-tag">功學社全球樂器</span>
+          <span class="aside-tag">雙語入口網</span>
+        </div>
+        <div class="aside-types">
+          <span class="aside-type">品牌形象網站</span>
+          <span class="aside-type">政府機關網站</span>
+          <span class="aside-type">財團法人官網</span>
+          <span class="aside-type">協會與機構網站</span>
+          <span class="aside-type">研究資料庫系統</span>
+          <span class="aside-type">客製化應用系統</span>
+          <span class="aside-type">電子報平台</span>
+          <span class="aside-type">政府標案專案</span>
+        </div>
       </div>
-      <div class="aside-monogram">
-        <span class="initials">產業類型</span>
-        <p>政府機關、宗教團體、醫療單位、財團法人、中小企業、餐飲業、研究資料庫、跨國醫療軟體業、金融業、醫藥業</p>
-      </div>
-      <div class="aside-card">
-        <strong class="num">15+</strong>
-        <span class="num-label">網站 / 產品專案</span>
+
+      <div class="aside-card aside-card-dark">
+        <div class="aside-card-header">
+          <strong class="num" style="color:#fff">14+</strong>
+          <span class="num-label" style="color:rgba(255,255,255,0.6)">市場研究專案</span>
+        </div>
+        <div class="aside-research-group">
+          <p class="aside-research-label">本地專案</p>
+          <div class="aside-tags">
+            <span class="aside-tag dark">信用支付與金融科技</span>
+            <span class="aside-tag dark">保健食品</span>
+            <span class="aside-tag dark">新型菸草產品</span>
+            <span class="aside-tag dark">消費性家電</span>
+            <span class="aside-tag dark">數位網路服務</span>
+            <span class="aside-tag dark">藥品與醫藥</span>
+            <span class="aside-tag dark">機能性飲品</span>
+          </div>
+        </div>
+        <div class="aside-research-group">
+          <p class="aside-research-label">跨國合作</p>
+          <div class="aside-tags">
+            <span class="aside-tag dark">跨國醫療軟體</span>
+            <span class="aside-tag dark">金融與保險</span>
+            <span class="aside-tag dark">國際醫藥產業</span>
+          </div>
+        </div>
       </div>
     </aside>
   </div>
@@ -505,7 +668,65 @@
       <blockquote>
         「我擅長把使用者的語言轉化為<br>團隊能理解、能執行的產品方向。」
       </blockquote>
-      
+
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH PROCESS -->
+<section class="section process-section" id="process">
+  <div class="container">
+    <p class="section-label">Research Process</p>
+    <h2>我如何做研究。</h2>
+    <p class="section-intro">每一個研究案例，都遵循以下的思考與執行流程。從定義問題到產出建議，每個步驟都有其目的。</p>
+
+    <div class="process-flow">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div class="step-icon">🎯</div>
+        <h4>定義問題</h4>
+        <p>與利害關係人討論，釐清研究目標與核心問題。確認「我們想知道什麼」，而非直接跳到「怎麼做」。</p>
+      </div>
+      <div class="process-arrow">→</div>
+
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div class="step-icon">📐</div>
+        <h4>研究設計</h4>
+        <p>選擇適合的研究方法（訪談、焦點團體、觀察等），設計招募條件、訪綱與研究工具。</p>
+      </div>
+      <div class="process-arrow">→</div>
+
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div class="step-icon">🧑‍🤝‍🧑</div>
+        <h4>招募與準備</h4>
+        <p>依研究目標設計篩選條件，確保受訪者具備相關背景。必要時安排訪前 Homework，激活受訪者的真實經驗。</p>
+      </div>
+      <div class="process-arrow">→</div>
+
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div class="step-icon">🎙️</div>
+        <h4>執行研究</h4>
+        <p>帶領訪談或焦點團體，在自然對話中引導受訪者表達真實想法、行為與情緒反應。</p>
+      </div>
+      <div class="process-arrow">→</div>
+
+      <div class="process-step">
+        <div class="step-num">05</div>
+        <div class="step-icon">🔍</div>
+        <h4>資料分析</h4>
+        <p>整理逐字稿與觀察紀錄，找出重複出現的模式、語句與行為，進行主題歸納與分群。</p>
+      </div>
+      <div class="process-arrow">→</div>
+
+      <div class="process-step">
+        <div class="step-num">06</div>
+        <div class="step-icon">💡</div>
+        <h4>洞察與建議</h4>
+        <p>將資料轉化為清楚的使用者洞察，提出具體可行的產品或策略建議，並回應最初的研究問題。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -598,7 +819,7 @@
         <h3>購物平台消費決策行為研究</h3>
         <div class="case-result">✨ 關鍵成果：發現性別、年齡與收入對平台選擇與決策模式有顯著差異，提出降低決策成本的設計方向。</div>
         <p class="case-body">
-          此為自發質性研究，以身邊交友圈為對象進行訪談（3–5 人），刻意納入不同性別、職業、婚姻狀況與月收入的受訪者，
+          此為自發質性研究，以身邊交友圈為對象進行訪談，刻意納入不同性別、職業、婚姻狀況與月收入的受訪者，
           目標是探索電商平台使用者從搜尋到購買的決策流程，找出影響行為的關鍵變數。
           這是一個 exploratory 研究，著重模式發現與假設建立，而非統計驗證。
         </p>
@@ -655,10 +876,10 @@
       </article>
 
       <article class="timeline-item">
-        <div class="timeline-date">2020 — 2021</div>
+        <div class="timeline-date">2020.08 — 2021.02</div>
         <div class="timeline-content">
           <h3>亞地市場研究顧問有限公司</h3>
-          <h4>督導研究員</h4>
+          <h4>督導研究員 / Research Supervisor</h4>
           <ul>
             <li>執行質性研究與消費者座談會，協助客戶理解市場現況與使用者需求</li>
             <li>負責受訪者招募、篩選條件設計、專案時程安排與品質控管</li>
